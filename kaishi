@@ -1,0 +1,140 @@
+#!/usr/bin/env bash
+
+# This is the kaishi script for setting up your laptop with the
+# full stack for web development at Icalia Labs.
+
+set -e
+
+# Shared functions
+
+pretty_print() {
+  printf "\n%b\n" "$1"
+}
+
+pretty_print "Here we go..."
+
+# So it begins
+
+# Oh my zsh installation
+
+pretty_print "Installing oh-my-zsh..."
+  curl -L http://install.ohmyz.sh | sh
+
+# zsh fix
+if [[ -f /etc/zshenv ]]; then
+  pretty_print "Fixing OSX zsh environment bug ..."
+    sudo mv /etc/{zshenv,zshrc}
+fi
+
+# Homebrew installation
+
+if ! command -v brew &>/dev/null; then
+  pretty_print "Installing Homebrew, an OSX package manager, follow the instructions..." 
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+  if ! grep -qs "recommended by brew doctor" ~/.zshrc; then
+    pretty_print "Put Homebrew location earlier in PATH ..."
+      printf '\n# recommended by brew doctor\n' >> ~/.zshrc
+      printf 'export PATH="/usr/local/bin:$PATH"\n' >> ~/.zshrc
+      export PATH="/usr/local/bin:$PATH"
+  fi
+else
+  pretty_print "You already have Homebrew installed...good job!"
+fi
+
+pretty_print "Updating brew formulas"
+  brew update
+
+# Git installation
+
+pretty_print "Installing git for control version"
+  brew install git
+
+# Posgresql installation
+
+pretty_print "Installing postgresql for database management"
+  brew install postgresql --no-python
+
+# Vim installation
+
+pretty_print "Installing vim with Homebrew for latest version"
+  brew install vim
+
+# Image magick installation
+
+pretty_print "Installing image magick for image processing"
+  brew install imagemagick
+
+pretty_print "Starting postgres..."
+  brew services start postgres
+
+# Rbenv installation
+pretty_print "Rbenv installation for managing your rubies"
+  brew install rbenv
+
+if ! grep -qs "rbenv init" ~/.zshrc; then
+  printf 'export PATH="$HOME/.rbenv/bin:$PATH"\n' >> ~/.zshrc
+  printf 'eval "$(rbenv init - --no-rehash)"\n' >> ~/.zshrc
+
+  pretty_print "Enable shims and autocompletion ..."
+    eval "$(rbenv init -)"
+fi
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+pretty_print "Installing rbenv-gem-rehash, we don't want to rehash everytime we add a gem..."
+  brew install rbenv-gem-rehash
+
+pretty_print "Installing ruby-build to install Rubies ..."
+  brew install ruby-build
+
+# OpenSSL linking
+pretty_print "Installing and linking OpenSSL..."
+brew install openssl
+brew link openssl --force
+
+# Install ruby latest version
+ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"
+
+pretty_print "Installing Ruby $ruby_version" 
+  if [ "$ruby_version" = "2.1.1" ]; then
+    curl -fsSL https://gist.github.com/mislav/a18b9d7f0dc5b9efc162.txt | rbenv install --patch 2.1.1
+  else
+    rbenv install "$ruby_version"
+  fi
+
+  pretty_print "Set ruby version $ruby_version as the default"
+
+  rbenv global "$ruby_version"
+  rbenv rehash
+
+pretty_print "Updating gems..."
+  gem update --system
+
+pretty_print "Setup gemrc for default options"
+  printf 'gem: --no-document' >> ~/.gemrc
+
+# Bundler installation
+pretty_print "Installing bundler..."
+  gem install bundler
+
+pretty_print "Optimizing Bundler..." 
+  number_of_cores=$(sysctl -n hw.ncpu)
+  bundle config --global jobs $((number_of_cores - 1))
+
+pretty_print "Installing Foreman..."
+  gem install foreman
+
+pretty_print "Installing Rails...finally!"
+  gem install rails
+
+pretty_print "Installing the heroku toolbelt..."
+  brew install heroku-toolbelt
+
+pretty_print "Installing custom Rails app generator from Icalia"
+  curl -L https://raw2.github.com/IcaliaLabs/railsAppCustomGenerator/master/install.sh | sh
+
+pretty_print "Installing pow to serve local rails apps like a superhero..."
+  curl get.pow.cx | sh
+
+pretty_print "We are done!...everthing looks good!"

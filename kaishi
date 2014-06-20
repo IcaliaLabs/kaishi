@@ -128,6 +128,9 @@ pretty_print "Installing Foreman..."
 pretty_print "Installing Rails...finally!"
   gem install rails
 
+pretty_print "Installing mailcatcher gem...!"
+  gem install mailcatcher 
+
 pretty_print "Installing the heroku toolbelt..."
   brew install heroku-toolbelt
 

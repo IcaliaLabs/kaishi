@@ -19,7 +19,13 @@ Installation
 
 Remember, with great power comes great responsibility!
 
-	bash <(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi)
+### Mac OSX
+
+	bash <(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-mac)
+	
+### Linux
+	
+	bash <(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-linux)
 	
 And that is it!
 
@@ -27,20 +33,36 @@ And that is it!
 So what it's in the box
 -----------------------
 
-* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) as your default shell
-* Homebrew for managing packages
-* Git for version controlling
-* Postgresql as  the database manager
-* Vim for text editing
-* ImageMagick for images processing
-* Rbenv for managing the ruby environment
-* Bundler gem
-* Foreman for running apps
-* Rails gem for creating any rails app
-* Heroku toolbelt to interact with the Heroku API
-* RailsAppCustomGenerator for initializing any Rails app with Icalia's flavor
-* Pow to run local apps locally like a superhero
+### Mac OSX
 
+* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) as your default shell
+* [Homebrew](http://brew.sh/) for managing packages
+* [Git](http://git-scm.com/) for version controlling
+* [Postgresql](http://www.postgresql.org/) as  the database manager
+* [Vim](http://www.vim.org/) for text editing
+* [ImageMagick](http://www.imagemagick.org/) for images processing
+* [Rbenv](https://github.com/sstephenson/rbenv) for managing the ruby environment
+* [Bundler](http://bundler.io/) gem
+* [Foreman](https://github.com/ddollar/foreman) for running apps
+* [Rails](http://rubyonrails.org/) gem for creating any rails app
+* [Heroku](https://toolbelt.heroku.com/) toolbelt to interact with the Heroku API
+* [RailsAppCustomGenerator](https://github.com/IcaliaLabs/railsAppCustomGenerator) for initializing any Rails app with Icalia's flavor
+* [Pow](http://pow.cx/) to run local apps locally like a superhero
+
+### Linux
+
+* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) as your default shell
+* [Git](http://git-scm.com/) for version controlling
+* [Postgresql](http://www.postgresql.org/) as  the database manager
+* [Vim](http://www.vim.org/) for text editing
+* [ImageMagick](http://www.imagemagick.org/) for images processing
+* [Rbenv](https://github.com/sstephenson/rbenv) for managing the ruby environment
+* [Bundler](http://bundler.io/) gem
+* [Foreman](https://github.com/ddollar/foreman) for running apps
+* [Rails](http://rubyonrails.org/) gem for creating any rails app
+* [Heroku](https://toolbelt.heroku.com/) toolbelt to interact with the Heroku API
+* [RailsAppCustomGenerator](https://github.com/IcaliaLabs/railsAppCustomGenerator) for initializing any Rails app with Icalia's flavor
+* [Pow](http://pow.cx/) to run local apps locally like a superhero
 
 Credits
 -------

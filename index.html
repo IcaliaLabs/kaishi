@@ -1,34 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Kaishi by IcaliaLabs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <title>Kaishi by IcaliaLabs</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
+    <header>
+      <div class="inner">
         <h1>Kaishi</h1>
-        <p>A shell script to convert any Mac OS X into a real development machine</p>
+        <h2>A shell script to convert any Mac OS X into a real development machine</h2>
+        <a href="https://github.com/IcaliaLabs/kaishi" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-        <p class="view"><a href="https://github.com/IcaliaLabs/kaishi">View the Project on GitHub <small>IcaliaLabs/kaishi</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/IcaliaLabs/kaishi/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/IcaliaLabs/kaishi/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/IcaliaLabs/kaishi">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a name="kaishi" class="anchor" href="#kaishi"><span class="octicon octicon-link"></span></a>Kaishi</h1>
 
 <p>Kaishi is a bash script to set up your Mac OSX for full web stack Rails development.</p>
@@ -47,7 +47,16 @@
 
 <p>Remember, with great power comes great responsibility!</p>
 
-<pre><code>bash &lt;(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi)
+<h3>
+<a name="mac-osx" class="anchor" href="#mac-osx"><span class="octicon octicon-link"></span></a>Mac OSX</h3>
+
+<pre><code>bash &lt;(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-mac)
+</code></pre>
+
+<h3>
+<a name="linux" class="anchor" href="#linux"><span class="octicon octicon-link"></span></a>Linux</h3>
+
+<pre><code>bash &lt;(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-linux)
 </code></pre>
 
 <p>And that is it!</p>
@@ -55,21 +64,64 @@
 <h2>
 <a name="so-what-its-in-the-box" class="anchor" href="#so-what-its-in-the-box"><span class="octicon octicon-link"></span></a>So what it's in the box</h2>
 
+<h3>
+<a name="mac-osx-1" class="anchor" href="#mac-osx-1"><span class="octicon octicon-link"></span></a>Mac OSX</h3>
+
 <ul>
 <li>
 <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> as your default shell</li>
-<li>Homebrew for managing packages</li>
-<li>Git for version controlling</li>
-<li>Postgresql as  the database manager</li>
-<li>Vim for text editing</li>
-<li>ImageMagick for images processing</li>
-<li>Rbenv for managing the ruby environment</li>
-<li>Bundler gem</li>
-<li>Foreman for running apps</li>
-<li>Rails gem for creating any rails app</li>
-<li>Heroku toolbelt to interact with the Heroku API</li>
-<li>RailsAppCustomGenerator for initializing any Rails app with Icalia's flavor</li>
-<li>Pow to run local apps locally like a superhero</li>
+<li>
+<a href="http://brew.sh/">Homebrew</a> for managing packages</li>
+<li>
+<a href="http://git-scm.com/">Git</a> for version controlling</li>
+<li>
+<a href="http://www.postgresql.org/">Postgresql</a> as  the database manager</li>
+<li>
+<a href="http://www.vim.org/">Vim</a> for text editing</li>
+<li>
+<a href="http://www.imagemagick.org/">ImageMagick</a> for images processing</li>
+<li>
+<a href="https://github.com/sstephenson/rbenv">Rbenv</a> for managing the ruby environment</li>
+<li>
+<a href="http://bundler.io/">Bundler</a> gem</li>
+<li>
+<a href="https://github.com/ddollar/foreman">Foreman</a> for running apps</li>
+<li>
+<a href="http://rubyonrails.org/">Rails</a> gem for creating any rails app</li>
+<li>
+<a href="https://toolbelt.heroku.com/">Heroku</a> toolbelt to interact with the Heroku API</li>
+<li>
+<a href="https://github.com/IcaliaLabs/railsAppCustomGenerator">RailsAppCustomGenerator</a> for initializing any Rails app with Icalia's flavor</li>
+<li>
+<a href="http://pow.cx/">Pow</a> to run local apps locally like a superhero</li>
+</ul><h3>
+<a name="linux-1" class="anchor" href="#linux-1"><span class="octicon octicon-link"></span></a>Linux</h3>
+
+<ul>
+<li>
+<a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> as your default shell</li>
+<li>
+<a href="http://git-scm.com/">Git</a> for version controlling</li>
+<li>
+<a href="http://www.postgresql.org/">Postgresql</a> as  the database manager</li>
+<li>
+<a href="http://www.vim.org/">Vim</a> for text editing</li>
+<li>
+<a href="http://www.imagemagick.org/">ImageMagick</a> for images processing</li>
+<li>
+<a href="https://github.com/sstephenson/rbenv">Rbenv</a> for managing the ruby environment</li>
+<li>
+<a href="http://bundler.io/">Bundler</a> gem</li>
+<li>
+<a href="https://github.com/ddollar/foreman">Foreman</a> for running apps</li>
+<li>
+<a href="http://rubyonrails.org/">Rails</a> gem for creating any rails app</li>
+<li>
+<a href="https://toolbelt.heroku.com/">Heroku</a> toolbelt to interact with the Heroku API</li>
+<li>
+<a href="https://github.com/IcaliaLabs/railsAppCustomGenerator">RailsAppCustomGenerator</a> for initializing any Rails app with Icalia's flavor</li>
+<li>
+<a href="http://pow.cx/">Pow</a> to run local apps locally like a superhero</li>
 </ul><h2>
 <a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
 
@@ -91,13 +143,25 @@
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/IcaliaLabs">IcaliaLabs</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/IcaliaLabs/kaishi/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/IcaliaLabs/kaishi/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/IcaliaLabs/kaishi"></a> is maintained by <a href="https://github.com/IcaliaLabs">IcaliaLabs</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+
+  
   </body>
 </html>

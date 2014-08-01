@@ -1,0 +1,108 @@
+#!/bin/bash
+
+pretty_print() {
+  printf "\n%b\n" "$1"
+}
+
+if [ ! -f "$HOME/.zshrc" ]; then
+  touch $HOME/.zshrc
+fi
+
+if [[ ":$PATH:" != *":$HOME/.bin:"* ]]; then
+  printf 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
+  export PATH="$HOME/.bin:$PATH"
+fi
+
+pretty_print "Installing aptitude..."
+sudo apt-get install -y aptitude
+
+pretty_print "Update packages..."
+sudo aptitude update
+
+pretty_print "Install git..."
+sudo aptitude install git -y
+
+pretty_print "Install curl..."
+sudo apt-get install curl -y
+
+pretty_print "Installing Oh-my-zsh..."
+curl -L http://install.ohmyz.sh | sh
+
+pretty_print "Install packages needed for rails..."
+sudo aptitude install libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev -y
+sudo aptitude install nodejs -y
+
+pretty_print "Install postgresql..."
+sudo aptitude install postgresql postgresql-server-dev-all -y
+sudo aptitude install libpq-dev -y
+
+pretty_print "Installing Vim..."
+sudo aptitude install -y vim-gtk
+
+pretty_print "Installing ImageMagick..."
+sudo aptitude install -y imagemagick
+
+pretty_print "Install heroku toolbelt..."
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+pretty_print "Install YAML library..."
+sudo apt-get install libyaml-dev -y
+
+pretty_print "Installing rbenv..."
+if [[ ! -d "$HOME/.rbenv" ]]; then
+  pretty_print "Installing rbenv, to change Ruby versions ..."
+    git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+
+    if ! grep -qs "rbenv init" ~/.zshrc; then
+      printf 'export PATH="$HOME/.rbenv/bin:$PATH"\n' >> ~/.zshrc
+      printf 'eval "$(rbenv init - --no-rehash)"\n' >> ~/.zshrc
+    fi
+
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
+
+if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]; then
+  pretty_print "Installing rbenv-gem-rehash..."
+    git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+fi
+
+if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]; then
+  pretty_print "Installing ruby-build, to install Rubies ..."
+    git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+fi
+
+ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"
+
+pretty_print "Installing Ruby $ruby_version ..."
+rbenv install -s "$ruby_version"
+
+pretty_print "Setting $ruby_version as global default Ruby ..."
+rbenv global "$ruby_version"
+rbenv rehash
+
+pretty_print "Updating gems..."
+gem update --system
+
+pretty_print "Installing bundler"
+gem install bundler --no-document --pre
+
+pretty_print "Parallel bundler gem installation..."
+number_of_cores=$(nproc)
+bundle config --global jobs $((number_of_cores - 1))
+
+pretty_print "Installing rails..."
+gem install rails --version 4.1.0 --no-ri --no-rdoc
+
+pretty_print "Installing foreman"
+gem install foreman --no-document
+
+pretty_print "Installing railsAppCustomGenerator..."
+curl -L https://raw2.github.com/IcaliaLabs/railsAppCustomGenerator/master/install.sh | sh
+
+pretty_print "Installing prax..."
+git clone git://github.com/ysbaddaden/prax.git
+cd prax && ./bin/prax install
+printf 'prax start\n' >> ~/.zshrc
+
+

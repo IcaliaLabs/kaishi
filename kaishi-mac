@@ -10,7 +10,7 @@ set -e
 pretty_print() {
   printf "\n%b\n" "$1"
 }
-
+# 
 pretty_print "Here we go..."
 
 # So it begins
@@ -42,8 +42,23 @@ else
   pretty_print "You already have Homebrew installed...good job!"
 fi
 
+# Homebrew OSX libraries
+
 pretty_print "Updating brew formulas"
-  brew update
+  	brew update
+
+pretty_print "Installing GNU core utilities..."
+	brew install coreutils
+
+pretty_print "Installing GNU find, locate, updatedb and xargs..."
+	brew install findutils
+
+pretty_print "Installing the most recent verions of some OSX tools"
+	brew tap homebrew/dupes
+	brew install homebrew/dupes/grep
+
+printf 'export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"' >> ~/.zshrc
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
 # Git installation
 
@@ -64,9 +79,6 @@ pretty_print "Installing vim with Homebrew for latest version"
 
 pretty_print "Installing image magick for image processing"
   brew install imagemagick
-
-pretty_print "Starting postgres..."
-  brew services start postgres
 
 # Rbenv installation
 pretty_print "Rbenv installation for managing your rubies"
@@ -117,7 +129,7 @@ pretty_print "Setup gemrc for default options"
 # Bundler installation
 pretty_print "Installing bundler..."
   gem install bundler
-
+# 
 pretty_print "Optimizing Bundler..." 
   number_of_cores=$(sysctl -n hw.ncpu)
   bundle config --global jobs $((number_of_cores - 1))
@@ -139,5 +151,70 @@ pretty_print "Installing custom Rails app generator from Icalia"
 
 pretty_print "Installing pow to serve local rails apps like a superhero..."
   curl get.pow.cx | sh
+
+pretty_print "Installing launchrocket to manage your homebrew formulas like a champ!"
+	brew cask install launchrocket
+
+#Install brew cask
+pretty_print "Installing cask to install apps"
+	brew install caskroom/cask/brew-cask
+ 
+#Install apps
+# 
+apps=(
+  slack
+  spotify
+  google-chrome
+  dropbox
+  appcleaner
+  firefox
+  mou
+  iterm2
+  macvim
+  sublime-text
+  gitx
+  testflight
+  vlc
+  google-drive
+  tomighty
+  rescuetime
+)
+
+for app in "${apps[@]}"
+do
+	printf "Should I install %s\n" $app
+	echo "Type Y to accept: \c"
+	read line
+	if [ "$line" = Y ] || [ "$line" = y ]; then
+		brew cask install --appdir="/Applications" $app
+	fi
+done
+
+
+#Installing fonts
+pretty_print "Installing some caskroom/fonts..."
+brew tap caskroom/fonts
+
+fonts=(
+  font-m-plus
+  font-clear-sans
+  font-roboto
+  font-open-sans
+  font-source-sans-pro
+  font-lato
+  font-alegreya
+  font-montserrat
+  font-inconsolata
+  font-pt-sans
+  font-quattrocento-sans
+  font-quicksand
+  font-raleway
+  font-sorts-mill-goudy
+  font-ubuntu
+)
+
+# install fonts
+pretty_print "Installing the fonts..."
+brew cask install ${fonts[@]}
 
 pretty_print "We are done!...everthing looks good!"

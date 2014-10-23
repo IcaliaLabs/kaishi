@@ -1,34 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>Kaishi by IcaliaLabs</title>
 
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <title>Kaishi by IcaliaLabs</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Kaishi</h1>
-        <h2>A shell script to convert any Mac OS X into a real development machine</h2>
-        <a href="https://github.com/IcaliaLabs/kaishi" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Kaishi</h1>
+        <p class="header">A shell script to convert any Mac OS X into a real development machine</p>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/IcaliaLabs/kaishi/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/IcaliaLabs/kaishi/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/IcaliaLabs/kaishi">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/IcaliaLabs">IcaliaLabs</a></p>
+
+
+      </header>
+      <section>
+        <h1>
 <a name="kaishi" class="anchor" href="#kaishi"><span class="octicon octicon-link"></span></a>Kaishi</h1>
 
 <p>Kaishi is a bash script to set up your Mac OSX for full web stack Rails development.</p>
@@ -38,9 +40,9 @@
 
 <p>Install the C compiler:</p>
 
-<p>For Lion (10.7) or Mountain Lion (10.8), use <a href="https://developer.apple.com/downloads/index.action">Command Line Tools for Xcode</a></p>
+<p>For Lion (10.7) or Mountain Lion (10.8) use <a href="https://developer.apple.com/downloads/index.action">Command Line Tools for Xcode</a></p>
 
-<p>For Mavericks (10.9), execute <code>sudo xcodebuild -license</code> and follow the instructions to accept the XCode agreement. After that you just run <code>xcode-select --install</code> and proceed with the installation.</p>
+<p>For Mavericks (10.9) or Yosemite (10.10), execute <code>sudo xcodebuild -license</code> and follow the instructions to accept the XCode agreement. After that you just run <code>xcode-select --install</code> and proceed with the installation.</p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -94,7 +96,70 @@
 <a href="https://github.com/IcaliaLabs/railsAppCustomGenerator">RailsAppCustomGenerator</a> for initializing any Rails app with Icalia's flavor</li>
 <li>
 <a href="http://pow.cx/">Pow</a> to run local apps locally like a superhero</li>
-</ul><h3>
+<li>
+<a href="https://github.com/caskroom/homebrew-cask">Homebrew cask</a> A CLI workflow for the administration of Mac applications distributed as binaries </li>
+<li>
+<a href="https://github.com/jimbojsb/launchrocket">Launchrocket</a> A Mac PrefPane to manage all your Homebrew-installed services </li>
+</ul>
+
+<h4>
+<a name="optional-cask-installation" class="anchor" href="#optional-cask-installation"><span class="octicon octicon-link"></span></a>Optional Cask installation</h4>
+
+<ul>
+<li>
+<a href="https://slack.com/">Slack</a> is a platform for team communication: everything in one place, instantly searchable, available wherever you go.</li>
+<li>
+<a href="https://www.spotify.com/us/">Spotify</a> Listen to the right music, wherever you are.</li>
+<li>
+<a href="https://www.dropbox.com/">Dropbox</a> Your stuff, anywhere </li>
+<li>
+<a href="http://www.freemacsoft.net/appcleaner/">AppCleaner</a> is a small application which allows you to thoroughly uninstall unwanted apps.</li>
+<li>
+<a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> Committed to you, your privacy and an open Web</li>
+<li>
+<a href="http://25.io/mou/">Mou</a> Markdown editor for developers.</li>
+<li>
+<a href="http://iterm2.com/">iTerm2</a> is a replacement for Terminal and the successor to iTerm</li>
+<li>
+<a href="https://code.google.com/p/macvim/">MacVim</a> MacVim is the text editor Vim for Mac OS X.</li>
+<li>
+<a href="http://www.sublimetext.com/">Sublime Text</a> is a sophisticated text editor for code, markup and prose. You'll love the slick user interface, extraordinary features and amazing performance.</li>
+<li>
+<a href="http://gitx.frim.nl/">Gitx</a> is a git GUI made for Mac OS X</li>
+<li>
+<a href="https://testflightapp.com/">TestFlight</a> A free mobile platform for developers, managers and testers.</li>
+<li>
+<a href="http://www.videolan.org/vlc/">VLC</a> VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols.</li>
+<li>
+<a href="https://www.google.com/intl/en/drive/">Google Drive</a> All your files, ready where you are</li>
+<li>
+<a href="http://www.tomighty.org/">Tomighty</a> A free desktop timer for the Pomodoro Technique</li>
+<li>
+<a href="https://www.rescuetime.com/">RescueTime</a> helps you understand your daily habits so you can focus and be more productive.</li>
+</ul>
+
+<h4>
+<a name="fonts" class="anchor" href="#fonts"><span class="octicon octicon-link"></span></a>Fonts</h4>
+
+<ul>
+<li>M Plus</li>
+<li>Clear Sans</li>
+<li>Roboto</li>
+<li>Open Sans</li>
+<li>Source Sans Pro</li>
+<li>Lato</li>
+<li>Alegreya</li>
+<li>Montserrat</li>
+<li>Inconsolata</li>
+<li>PT Sans</li>
+<li>Quattrocento Sans</li>
+<li>Quicksand</li>
+<li>Raleway</li>
+<li>Sorts Mill Goudy</li>
+<li>Ubuntu</li>
+</ul>
+
+<h3>
 <a name="linux-1" class="anchor" href="#linux-1"><span class="octicon octicon-link"></span></a>Linux</h3>
 
 <ul>
@@ -122,7 +187,9 @@
 <a href="https://github.com/IcaliaLabs/railsAppCustomGenerator">RailsAppCustomGenerator</a> for initializing any Rails app with Icalia's flavor</li>
 <li>
 <a href="http://pow.cx/">Pow</a> to run local apps locally like a superhero</li>
-</ul><h2>
+</ul>
+
+<h2>
 <a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
 
 <p><img src="https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/logo.png" alt="icalialabs"></p>
@@ -143,25 +210,12 @@
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/IcaliaLabs/kaishi/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/IcaliaLabs/kaishi/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/IcaliaLabs/kaishi"></a> is maintained by <a href="https://github.com/IcaliaLabs">IcaliaLabs</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
     </div>
-
-  
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>

@@ -9,9 +9,9 @@ Requirements
 
 Install the C compiler:
 
-For Lion (10.7) or Mountain Lion (10.8), use [Command Line Tools for Xcode](https://developer.apple.com/downloads/index.action)
+For Lion (10.7) or Mountain Lion (10.8) use [Command Line Tools for Xcode](https://developer.apple.com/downloads/index.action)
 
-For Mavericks (10.9), execute `sudo xcodebuild -license` and follow the instructions to accept the XCode agreement. After that you just run `xcode-select --install` and proceed with the installation.
+For Mavericks (10.9) or Yosemite (10.10), execute `sudo xcodebuild -license` and follow the instructions to accept the XCode agreement. After that you just run `xcode-select --install` and proceed with the installation.
 
 
 Installation

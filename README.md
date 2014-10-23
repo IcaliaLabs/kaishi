@@ -21,7 +21,7 @@ Remember, with great power comes great responsibility!
 
 ### Mac OSX
 
-	bash <(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-mac)
+	bash <(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/yosemite/kaishi-mac)
 	
 ### Linux
 	
@@ -47,7 +47,7 @@ So what it's in the box
 * [Rails](http://rubyonrails.org/) gem for creating any rails app
 * [Heroku](https://toolbelt.heroku.com/) toolbelt to interact with the Heroku API
 * [RailsAppCustomGenerator](https://github.com/IcaliaLabs/railsAppCustomGenerator) for initializing any Rails app with Icalia's flavor
-* [Pow](http://pow.cx/) to run local apps locally like a superhero
+* [Pow](http://pow.cx/) to run local apps locally like a superhero* 
 
 ### Linux
 

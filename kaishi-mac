@@ -154,6 +154,12 @@ pretty_print "Installing custom Rails app generator from Icalia"
 pretty_print "Installing pow to serve local rails apps like a superhero..."
   curl get.pow.cx | sh
 
+pretty_print "Installing NodeJs..."
+  brew install node 
+
+pretty_print "Installing Grunt..."
+  npm install -g grunt-cli
+
 #Install brew cask
 pretty_print "Installing cask to install apps"
 	brew install caskroom/cask/brew-cask

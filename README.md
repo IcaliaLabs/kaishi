@@ -48,6 +48,8 @@ So what it's in the box
 * [Heroku](https://toolbelt.heroku.com/) toolbelt to interact with the Heroku API
 * [RailsAppCustomGenerator](https://github.com/IcaliaLabs/railsAppCustomGenerator) for initializing any Rails app with Icalia's flavor
 * [Pow](http://pow.cx/) to run local apps locally like a superhero
+* [NodeJS](http://nodejs.org/) a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications
+* [Grunt](http://gruntjs.com/) the JavaScript Task Runner
 * [Homebrew cask](https://github.com/caskroom/homebrew-cask) A CLI workflow for the administration of Mac applications distributed as binaries 
 * [Launchrocket](https://github.com/jimbojsb/launchrocket) A Mac PrefPane to manage all your Homebrew-installed services 
 

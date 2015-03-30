@@ -25,6 +25,9 @@ sudo aptitude install git -y
 pretty_print "Install curl..."
 sudo apt-get install curl -y
 
+pretty_print "Installing zsh..."
+sudo apt-get install zsh
+
 pretty_print "Installing Oh-my-zsh..."
 curl -L http://install.ohmyz.sh | sh
 

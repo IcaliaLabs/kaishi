@@ -25,6 +25,9 @@ sudo aptitude install git -y
 pretty_print "Install curl..."
 sudo apt-get install curl -y
 
+pretty_print "Installing zsh..."
+sudo apt-get install zsh
+
 pretty_print "Installing Oh-my-zsh..."
 curl -L http://install.ohmyz.sh | sh
 
@@ -70,6 +73,9 @@ fi
 if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]; then
   pretty_print "Installing ruby-build, to install Rubies ..."
     git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+
+    # Resolve https://github.com/sstephenson/ruby-build/issues/690
+    sudo apt-get install libffi-dev
 fi
 
 ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"

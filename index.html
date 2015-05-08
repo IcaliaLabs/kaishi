@@ -1,42 +1,31 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>Kaishi by IcaliaLabs</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">Kaishi</h1>
-        <p class="header">A shell script to convert any Mac OS X into a real development machine</p>
+    <section class="page-header">
+      <h1 class="project-name">Kaishi</h1>
+      <h2 class="project-tagline">A shell script to convert any Mac OS X into a real development machine</h2>
+      <a href="https://github.com/IcaliaLabs/kaishi" class="btn">View on GitHub</a>
+      <a href="https://github.com/IcaliaLabs/kaishi/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/IcaliaLabs/kaishi/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/IcaliaLabs/kaishi/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/IcaliaLabs/kaishi/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/IcaliaLabs/kaishi">View On GitHub</a></li>
-        </ul>
-
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/IcaliaLabs">IcaliaLabs</a></p>
-
-
-      </header>
-      <section>
-        <h1>
-<a name="kaishi" class="anchor" href="#kaishi"><span class="octicon octicon-link"></span></a>Kaishi</h1>
+    <section class="main-content">
+      <h1>
+<a id="kaishi" class="anchor" href="#kaishi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kaishi</h1>
 
 <p>Kaishi is a bash script to set up your Mac OSX for full web stack Rails development.</p>
 
 <h2>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <p>Install the C compiler:</p>
 
@@ -45,18 +34,18 @@
 <p>For Mavericks (10.9) or Yosemite (10.10), execute <code>sudo xcodebuild -license</code> and follow the instructions to accept the XCode agreement. After that you just run <code>xcode-select --install</code> and proceed with the installation.</p>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Remember, with great power comes great responsibility!</p>
 
 <h3>
-<a name="mac-osx" class="anchor" href="#mac-osx"><span class="octicon octicon-link"></span></a>Mac OSX</h3>
+<a id="mac-osx" class="anchor" href="#mac-osx" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mac OSX</h3>
 
 <pre><code>bash &lt;(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-mac)
 </code></pre>
 
 <h3>
-<a name="linux" class="anchor" href="#linux"><span class="octicon octicon-link"></span></a>Linux</h3>
+<a id="linux" class="anchor" href="#linux" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linux</h3>
 
 <pre><code>bash &lt;(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-linux)
 </code></pre>
@@ -64,10 +53,10 @@
 <p>And that is it!</p>
 
 <h2>
-<a name="so-what-its-in-the-box" class="anchor" href="#so-what-its-in-the-box"><span class="octicon octicon-link"></span></a>So what it's in the box</h2>
+<a id="so-what-its-in-the-box" class="anchor" href="#so-what-its-in-the-box" aria-hidden="true"><span class="octicon octicon-link"></span></a>So what it's in the box</h2>
 
 <h3>
-<a name="mac-osx-1" class="anchor" href="#mac-osx-1"><span class="octicon octicon-link"></span></a>Mac OSX</h3>
+<a id="mac-osx-1" class="anchor" href="#mac-osx-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mac OSX</h3>
 
 <ul>
 <li>
@@ -93,9 +82,13 @@
 <li>
 <a href="https://toolbelt.heroku.com/">Heroku</a> toolbelt to interact with the Heroku API</li>
 <li>
-<a href="https://github.com/IcaliaLabs/railsAppCustomGenerator">RailsAppCustomGenerator</a> for initializing any Rails app with Icalia's flavor</li>
+<a href="https://github.com/IcaliaLabs/platter">Platter</a> for initializing any Rails app with Icalia's flavor</li>
 <li>
 <a href="http://pow.cx/">Pow</a> to run local apps locally like a superhero</li>
+<li>
+<a href="http://nodejs.org/">NodeJS</a> a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications</li>
+<li>
+<a href="http://gruntjs.com/">Grunt</a> the JavaScript Task Runner</li>
 <li>
 <a href="https://github.com/caskroom/homebrew-cask">Homebrew cask</a> A CLI workflow for the administration of Mac applications distributed as binaries </li>
 <li>
@@ -103,7 +96,7 @@
 </ul>
 
 <h4>
-<a name="optional-cask-installation" class="anchor" href="#optional-cask-installation"><span class="octicon octicon-link"></span></a>Optional Cask installation</h4>
+<a id="optional-cask-installation" class="anchor" href="#optional-cask-installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optional Cask installation</h4>
 
 <ul>
 <li>
@@ -139,7 +132,7 @@
 </ul>
 
 <h4>
-<a name="fonts" class="anchor" href="#fonts"><span class="octicon octicon-link"></span></a>Fonts</h4>
+<a id="fonts" class="anchor" href="#fonts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fonts</h4>
 
 <ul>
 <li>M Plus</li>
@@ -160,7 +153,7 @@
 </ul>
 
 <h3>
-<a name="linux-1" class="anchor" href="#linux-1"><span class="octicon octicon-link"></span></a>Linux</h3>
+<a id="linux-1" class="anchor" href="#linux-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linux</h3>
 
 <ul>
 <li>
@@ -184,13 +177,13 @@
 <li>
 <a href="https://toolbelt.heroku.com/">Heroku</a> toolbelt to interact with the Heroku API</li>
 <li>
-<a href="https://github.com/IcaliaLabs/railsAppCustomGenerator">RailsAppCustomGenerator</a> for initializing any Rails app with Icalia's flavor</li>
+<a href="https://github.com/IcaliaLabs/platter">Platter</a> for initializing any Rails app with Icalia's flavor</li>
 <li>
 <a href="http://pow.cx/">Pow</a> to run local apps locally like a superhero</li>
 </ul>
 
 <h2>
-<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
 
 <p><img src="https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/logo.png" alt="icalialabs"></p>
 
@@ -199,7 +192,7 @@
 <p>It is inspired on the <a href="https://github.com/thoughtbot/laptop">Laptop</a> project from <a href="http://thoughtbot.com/">thoughtbot</a>.</p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>The MIT License (MIT)</p>
 
@@ -210,12 +203,16 @@
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-      </section>
-      <footer>
-        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/IcaliaLabs/kaishi">Kaishi</a> is maintained by <a href="https://github.com/IcaliaLabs">IcaliaLabs</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
+    </section>
+
+  
   </body>
 </html>
+

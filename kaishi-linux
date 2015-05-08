@@ -92,7 +92,10 @@ number_of_cores=$(nproc)
 bundle config --global jobs $((number_of_cores - 1))
 
 pretty_print "Installing rails..."
-gem install rails --version 4.1.0 --no-ri --no-rdoc
+gem install rails --version 4.2.1 --no-ri --no-rdoc
+
+pretty_print "Installing platter..."
+gem install platter
 
 pretty_print "Installing foreman"
 gem install foreman --no-document

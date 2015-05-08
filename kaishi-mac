@@ -146,6 +146,9 @@ pretty_print "Installing Rails...finally!"
 pretty_print "Installing mailcatcher gem...!"
   gem install mailcatcher 
 
+pretty_print "Installing platter..."
+  gem install platter
+
 pretty_print "Installing the heroku toolbelt..."
   brew install heroku-toolbelt
 

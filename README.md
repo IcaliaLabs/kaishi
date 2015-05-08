@@ -46,7 +46,7 @@ So what it's in the box
 * [Foreman](https://github.com/ddollar/foreman) for running apps
 * [Rails](http://rubyonrails.org/) gem for creating any rails app
 * [Heroku](https://toolbelt.heroku.com/) toolbelt to interact with the Heroku API
-* [RailsAppCustomGenerator](https://github.com/IcaliaLabs/railsAppCustomGenerator) for initializing any Rails app with Icalia's flavor
+* [Platter](https://github.com/IcaliaLabs/platter) for initializing any Rails app with Icalia's flavor
 * [Pow](http://pow.cx/) to run local apps locally like a superhero
 * [NodeJS](http://nodejs.org/) a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications
 * [Grunt](http://gruntjs.com/) the JavaScript Task Runner
@@ -102,7 +102,7 @@ So what it's in the box
 * [Foreman](https://github.com/ddollar/foreman) for running apps
 * [Rails](http://rubyonrails.org/) gem for creating any rails app
 * [Heroku](https://toolbelt.heroku.com/) toolbelt to interact with the Heroku API
-* [RailsAppCustomGenerator](https://github.com/IcaliaLabs/railsAppCustomGenerator) for initializing any Rails app with Icalia's flavor
+* [Platter](https://github.com/IcaliaLabs/platter) for initializing any Rails app with Icalia's flavor
 * [Pow](http://pow.cx/) to run local apps locally like a superhero
 
 Credits

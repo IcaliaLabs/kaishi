@@ -482,6 +482,6 @@ then
 fi
 
 write_log 'Autoremove all the shit...'
-sudo apt-get Autoremove
+sudo apt-get autoremove
 
 write_log 'Thanks for using Kaishi !'

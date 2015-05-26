@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ##
- # Filename: 	kaishi-linux.sh
- # Author:		Icalia Labs
- # Github:		https://github.com/IcaliaLabs
+ # Filename:    kaishi-linux.sh
+ # Author:      Icalia Labs
+ # Github:      https://github.com/IcaliaLabs
  #
  # ========================================
- # 					Kaishi
+ #                  Kaishi
  # ========================================
  #
  # A script to set up your linux for full web stack Rails development.
@@ -22,180 +22,180 @@
 
 # Put an underscore to programs that require more than an: apt-get install
 declare -A programs=(
-	# Utilities
-	["git"]=true                        # Git
-	["curl"]=true                       # cUrl
-	["wget"]=true						# Wget
-	["zsh"]=true                        # Zsh
-	["_ohMyZsh"]=true                   # Oh my Zsh
-	["vim-gtk"]=true                    # Vim
-	["_spf13-vim"]=true                 # Vim plugins and resources
-	["_heroku-toolbelt"]=true           # Heroku command line client
-	["imagemagick"]=true                # ImageMagick
-	["vlc"]=true                        # VLC
+    # Utilities
+    ["git"]=true                        # Git
+    ["curl"]=true                       # cUrl
+    ["wget"]=true                       # Wget
+    ["zsh"]=true                        # Zsh
+    ["_ohMyZsh"]=true                   # Oh my Zsh
+    ["vim-gtk"]=true                    # Vim
+    ["_spf13-vim"]=true                 # Vim plugins and resources
+    ["_heroku-toolbelt"]=true           # Heroku command line client
+    ["imagemagick"]=true                # ImageMagick
+    ["vlc"]=true                        # VLC
 
-	# Software Development
-	["nodejs"]=true                     # Node.js
-	["npm"]=true                        # JavaScript package manager
-	["_postgreSQL"]=true                # PostgreSQL
-	["_rbenv"]=true                     # Ruby environment
-	["_prax"]=true                      # Ruby alternative to Pow
+    # Software Development
+    ["nodejs"]=true                     # Node.js
+    ["npm"]=true                        # JavaScript package manager
+    ["_postgreSQL"]=true                # PostgreSQL
+    ["_rbenv"]=true                     # Ruby environment
+    ["_prax"]=true                      # Ruby alternative to Pow
 
-	# Extra
-	["_slack"]=true                     # Slack
-	["_spotify"]=true                   # Spotify
-	["_remarkable"]=true                # Markdown editor
-	["_sublimeText"]=true               # Sublime Text 3
-	["_dropbox"]=true                   # Dropbox
-	["_rescueTime"]=true                # RescueTime
-	)
+    # Extra
+    ["_slack"]=true                     # Slack
+    ["_spotify"]=true                   # Spotify
+    ["_remarkable"]=true                # Markdown editor
+    ["_sublimeText"]=true               # Sublime Text 3
+    ["_dropbox"]=true                   # Dropbox
+    ["_rescueTime"]=true                # RescueTime
+    )
 
 declare -A gems=(
-	["bundler"]=true                    # Bundler
-	["rails"]=true                      # Ruby on Rails
-	["platter"]=true                    # Platter @IcaliaLabs
-	["foreman"]=true                    # Foreman
-	)
+    ["bundler"]=true                    # Bundler
+    ["rails"]=true                      # Ruby on Rails
+    ["platter"]=true                    # Platter @IcaliaLabs
+    ["foreman"]=true                    # Foreman
+    )
 
 declare -A js_packages=(
-	["grunt"]=true                      # Grunt
-	)
+    ["grunt"]=true                      # Grunt
+    )
 
 declare -a programs_ordered=(
-	# Utilities
-	"git"
-	"curl"
-	"wget"
-	"zsh"
-	"_ohMyZsh"
-	"vim-gtk"
-	"_spf13-vim"
-	"_heroku-toolbelt"
-	"imagemagick"
-	"vlc"
+    # Utilities
+    "git"
+    "curl"
+    "wget"
+    "zsh"
+    "_ohMyZsh"
+    "vim-gtk"
+    "_spf13-vim"
+    "_heroku-toolbelt"
+    "imagemagick"
+    "vlc"
 
-	# Software Developmentp
-	"nodejs"
-	"npm"
-	"_postgreSQL"
-	"_rbenv"
-	"_prax"
+    # Software Developmentp
+    "nodejs"
+    "npm"
+    "_postgreSQL"
+    "_rbenv"
+    "_prax"
 
-	# Extra
-	"_slack"
-	"_spotify"
-	"_remarkable"
-	"_sublimeText"
-	"_dropbox"
-	"_rescueTime"
-	)
+    # Extra
+    "_slack"
+    "_spotify"
+    "_remarkable"
+    "_sublimeText"
+    "_dropbox"
+    "_rescueTime"
+    )
 
 
 write_log()
 {
-	echo $1 | tee -a $LOG
+    echo $1 | tee -a $LOG
 }
 
 ask_to_install()
 {
 
-	echo "What do you want to do with:    $1?"
+    echo "What do you want to do with:    $1?"
 
-	select answer in "Install them all" \
-					 "Select which to install" \
-					 "Do not select anything"
-	do
-		case $answer in
-			Install* )
-				show_selected_for_installation $1
-				break
-				;;
-			Select* )
-				select_to_install $1
-				break
-				;;
-			"Do not"* )
-				dont_select_anything $1
-				break
-				;;
-		esac
-	done
+    select answer in "Install them all" \
+                     "Select which to install" \
+                     "Do not select anything"
+    do
+        case $answer in
+            Install* )
+                show_selected_for_installation $1
+                break
+                ;;
+            Select* )
+                select_to_install $1
+                break
+                ;;
+            "Do not"* )
+                dont_select_anything $1
+                break
+                ;;
+        esac
+    done
 }
 
 select_to_install()
 {
 
-	eval packages='${!'$1'[@]}'
+    eval packages='${!'$1'[@]}'
 
-	while true
-	do
-		for package in $packages
-		do
-			echo "Do you wish to install: ${package#_} ?"
-			echo "Description: $(apt-cache search ${package#_} | \
-							grep "${package#_} -" | head -n1 | cut -d ':' -f2)"
+    while true
+    do
+        for package in $packages
+        do
+            echo "Do you wish to install: ${package#_} ?"
+            echo "Description: $(apt-cache search ${package#_} | \
+                            grep "${package#_} -" | head -n1 | cut -d ':' -f2)"
 
-			select answer in "Yes" "No"
-			do
-			   case "$answer" in
-					Yes)
-						eval $1["$package"]=true
-						break
-					   ;;
+            select answer in "Yes" "No"
+            do
+               case "$answer" in
+                    Yes)
+                        eval $1["$package"]=true
+                        break
+                       ;;
 
-					No)
-						eval $1["$package"]=false
-						break
-						;;
+                    No)
+                        eval $1["$package"]=false
+                        break
+                        ;;
 
-					*)
-					   echo "Press 1 for Yes and 2 for No"
-						;;
-				esac
-			done
-		done
+                    *)
+                       echo "Press 1 for Yes and 2 for No"
+                        ;;
+                esac
+            done
+        done
 
-		show_selected_for_installation $1
+        show_selected_for_installation $1
 
-		echo "Are you OK with that?"
-		select answer in "Yes" "No"
-		do
-			case "$answer" in
-				Yes)
-					return
-				   ;;
+        echo "Are you OK with that?"
+        select answer in "Yes" "No"
+        do
+            case "$answer" in
+                Yes)
+                    return
+                   ;;
 
-				No)
-					break
-					;;
+                No)
+                    break
+                    ;;
 
-				*)
-			echo "Press 1 for Yes and 2 for No"
-					;;
-			esac
-		done
-	done
+                *)
+            echo "Press 1 for Yes and 2 for No"
+                    ;;
+            esac
+        done
+    done
 }
 
 dont_select_anything()
 {
-	eval packages='${!'$1'[@]}'
+    eval packages='${!'$1'[@]}'
 
-	for package in $packages
-	do
-		eval $1["$package"]=false
-	done
+    for package in $packages
+    do
+        eval $1["$package"]=false
+    done
 }
 
 show_selected_for_installation()
 {
-	eval packages='${!'$1'[@]}'
+    eval packages='${!'$1'[@]}'
 
-	for package in $packages
-	do
-		eval value='${'$1'['$package']}'
-		echo "Selected ${package#_}:" $value
-	done
+    for package in $packages
+    do
+        eval value='${'$1'['$package']}'
+        echo "Selected ${package#_}:" $value
+    done
 }
 
 
@@ -211,34 +211,34 @@ ask_to_install js_packages
 # Install <packages> with <method>:
 install()
 {
-	if [ "$1" == "programs" ]
-	then
-		packages=${programs_ordered[@]}
-	else
-		eval packages='${!'$1'[@]}'
-	fi
+    if [ "$1" == "programs" ]
+    then
+        packages=${programs_ordered[@]}
+    else
+        eval packages='${!'$1'[@]}'
+    fi
 
-	method=$2
+    method=$2
 
 
-	for package in $packages
-	do
-		eval is_selected_to_be_installed='${'$1'['$package']}'
+    for package in $packages
+    do
+        eval is_selected_to_be_installed='${'$1'['$package']}'
 
-		if [[ $package != _* ]] &&
-			[ $is_selected_to_be_installed == true ]
-		then
-			write_log "Installing: $package"
-			eval $method' '$package
-		fi
-	done
+        if [[ $package != _* ]] &&
+            [ $is_selected_to_be_installed == true ]
+        then
+            write_log "Installing: $package"
+            eval $method' '$package
+        fi
+    done
 }
 
 # Determine machine architecture
 if [ $(arch) = 'x86_64' ]; then
-	ARCH='x86_64'
+    ARCH='x86_64'
 else
-	ARCH='x86'
+    ARCH='x86'
 fi
 
 echo 'Creating logfile...'
@@ -254,8 +254,8 @@ install programs 'sudo apt-get -y install'
 echo 'gem: --no-document' > $HOME/.gemrc
 if [ ${gems['rails']} == true ]
 then
-	write_log "Installing Rails dependencies"
-	sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev libyaml-dev
+    write_log "Installing Rails dependencies"
+    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev libyaml-dev
 fi
 
 install gems 'gem install'
@@ -268,19 +268,19 @@ install js_packages 'sudo npm install'
 if [ ${programs['_ohMyZsh']} == true ]
 then
 
-	if [ ! -f "$HOME/.zshrc" ]
-	then
-		touch $HOME/.zshrc
-	fi
+    if [ ! -f "$HOME/.zshrc" ]
+    then
+        touch $HOME/.zshrc
+    fi
 
-	write_log 'Installing Oh my Zsh'
-	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+    write_log 'Installing Oh my Zsh'
+    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-	if [[ ":$PATH:" != *":$HOME/.bin:"* ]]
-	then
-		echo 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
-		export PATH="$HOME/.bin:$PATH"
-	fi
+    if [[ ":$PATH:" != *":$HOME/.bin:"* ]]
+    then
+        echo 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
+        export PATH="$HOME/.bin:$PATH"
+    fi
 fi
 
 ###############################################################################
@@ -288,9 +288,9 @@ fi
 ###############################################################################
 if [ ${programs['_spf13-vim']} == true ]
 then
-	write_log 'Installing SPF13-Vim'
-	sh <(curl https://j.mp/spf13-vim3 -L)
-	> $HOME/.vimrc.bundles.local
+    write_log 'Installing SPF13-Vim'
+    sh <(curl https://j.mp/spf13-vim3 -L)
+    > $HOME/.vimrc.bundles.local
 fi
 
 ###############################################################################
@@ -298,17 +298,17 @@ fi
 ###############################################################################
 if [ ${programs['_heroku-toolbelt']} == true ]
 then
-	write_log 'Installing Heroku Toolbelt'
-	wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+    write_log 'Installing Heroku Toolbelt'
+    wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 fi
 
 ###############################################################################
 # PostgreSQL
 ###############################################################################
-if [ ${programs['_postgreSQL]'} == true ]
+if [ ${programs['_postgreSQL']} == true ]
 then
-	write_log "Installing PostgreSQL"
-	sudo apt-get install -y postgresql postgresql-server-dev-all libpq-dev
+    write_log "Installing PostgreSQL"
+    sudo apt-get install -y postgresql postgresql-server-dev-all libpq-dev
 fi
 
 ###############################################################################
@@ -316,49 +316,49 @@ fi
 ###############################################################################
 if [ ${programs['_rbenv']} == true ]
 then
-	write_log "Installing rbenv"
+    write_log "Installing rbenv"
 
-	if [[ ! -d "$HOME/.rbenv" ]]
-	then
-		git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
-		if ! grep -qs "rbenv init" ~/.zshrc
-		then
-			echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.zshrc
-			echo 'eval "$(rbenv init - --no-rehash)"' >> $HOME/.zshrc
-		fi
+    if [[ ! -d "$HOME/.rbenv" ]]
+    then
+        git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
+        if ! grep -qs "rbenv init" ~/.zshrc
+        then
+            echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.zshrc
+            echo 'eval "$(rbenv init - --no-rehash)"' >> $HOME/.zshrc
+        fi
 
-		export PATH="$HOME/.rbenv/bin:$PATH"
-		eval "$(rbenv init -)"
-	fi
+        export PATH="$HOME/.rbenv/bin:$PATH"
+        eval "$(rbenv init -)"
+    fi
 
-	if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]
-	then
-		write_log 'Installing rbenv-gem-rehash...'
-		git clone https://github.com/sstephenson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
-	fi
+    if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]
+    then
+        write_log 'Installing rbenv-gem-rehash...'
+        git clone https://github.com/sstephenson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
+    fi
 
-	if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]
-	then
-		write_log "Installing ruby-build, to install Rubies ..."
-		git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-		
-		# Resolve https://github.com/sstephenson/ruby-build/issues/690
-		sudo apt-get install libffi-dev
-	fi
+    if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]
+    then
+        write_log "Installing ruby-build, to install Rubies ..."
+        git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+        
+        # Resolve https://github.com/sstephenson/ruby-build/issues/690
+        sudo apt-get install libffi-dev
+    fi
 
-	ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"
-	write_log "Installing Ruby $ruby_version ..."
-	rbenv install -s "$ruby_version"
+    ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"
+    write_log "Installing Ruby $ruby_version ..."
+    rbenv install -s "$ruby_version"
 
-	ruby_version "Setting $ruby_version as global default Ruby ..."
-	rbenv global "$ruby_version"
-	rbenv rehash
-	write_log "Updating gems..."
-	gem update --system
+    ruby_version "Setting $ruby_version as global default Ruby ..."
+    rbenv global "$ruby_version"
+    rbenv rehash
+    write_log "Updating gems..."
+    gem update --system
 
-	write_log "Parallel bundler gem installation..."
-	number_of_cores=$(nproc)
-	bundle config --global jobs $((number_of_cores - 1))
+    write_log "Parallel bundler gem installation..."
+    number_of_cores=$(nproc)
+    bundle config --global jobs $((number_of_cores - 1))
 fi
 
 ###############################################################################
@@ -366,10 +366,10 @@ fi
 ###############################################################################
 if [ ${programs['_prax']} == true ]
 then
-	write_log "Installing prax..."
-	git clone git://github.com/ysbaddaden/prax.git
-	cd prax && ./bin/prax install
-	echo 'prax start' >> ~/.zshrc
+    write_log "Installing prax..."
+    git clone git://github.com/ysbaddaden/prax.git
+    cd prax && ./bin/prax install
+    echo 'prax start' >> ~/.zshrc
 fi
 
 ###############################################################################
@@ -377,14 +377,14 @@ fi
 ###############################################################################
 if [ ${programs['_slack']} == true ]
 then
-	write_log 'Adding repository for Slack...'
-	sudo apt-add-repository -y ppa:rael-gc/scudcloud
-	sudo apt-get -y update
-	
-	write_log 'Installing Slack'
-	sudo apt-get -y install sublime-text-installer
+    write_log 'Adding repository for Slack...'
+    sudo apt-add-repository -y ppa:rael-gc/scudcloud
+    sudo apt-get -y update
+    
+    write_log 'Installing Slack'
+    sudo apt-get -y install sublime-text-installer
 
-	echo "alias slack='scudcloud'" >> $HOME/.bashrc
+    echo "alias slack='scudcloud'" >> $HOME/.bashrc
 fi
 
 ###############################################################################
@@ -392,11 +392,11 @@ fi
 ###############################################################################
 if [ ${programs['_spotify']} == true ]
 then
-	write_log 'Adding repository for Spotify...'
-	sudo apt-add-repository -y "deb http://repository.spotify.com stable non-free"
-	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 94558F59
-	sudo apt-get -y update
-	sudo apt-get install spotify-client
+    write_log 'Adding repository for Spotify...'
+    sudo apt-add-repository -y "deb http://repository.spotify.com stable non-free"
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 94558F59
+    sudo apt-get -y update
+    sudo apt-get install spotify-client
 fi
 
 ###############################################################################
@@ -404,16 +404,16 @@ fi
 ###############################################################################
 if [ ${programs['_remarkable']} == true ]
 then
-	write_log 'Adding repository for Remarkable...'
-	wget http://remarkableapp.net/files/remarkable_1.41_all.deb
+    write_log 'Adding repository for Remarkable...'
+    wget http://remarkableapp.net/files/remarkable_1.41_all.deb
 
-	write_log 'Installing Remarkable dependencies'
-	sudo apt-get install python3-markdown python3-bs4 wkhtmltopdf
-	
-	write_log 'Installing Remarkable'
-	sudo dpkg -i remarkable_1.41_all.deb
+    write_log 'Installing Remarkable dependencies'
+    sudo apt-get install python3-markdown python3-bs4 wkhtmltopdf
+    
+    write_log 'Installing Remarkable'
+    sudo dpkg -i remarkable_1.41_all.deb
 
-	rm remarkable_1.41_all.deb
+    rm remarkable_1.41_all.deb
 fi
 
 ###############################################################################
@@ -421,12 +421,12 @@ fi
 ###############################################################################
 if [ ${programs['_sublimeText']} == true ]
 then
-	write_log 'Adding repository for Sublime Text 3...'
+    write_log 'Adding repository for Sublime Text 3...'
 
-	sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-	sudo apt-get -y update
-	write_log 'Installing Sublime Text 3'
-	sudo apt-get -y install sublime-text-installer
+    sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
+    sudo apt-get -y update
+    write_log 'Installing Sublime Text 3'
+    sudo apt-get -y install sublime-text-installer
 fi
 
 ###############################################################################
@@ -434,13 +434,13 @@ fi
 ###############################################################################
 if [ ${programs['_dropbox']} == true ]
 then
-	sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
-	write_log "Adding Dropbox repository"
-	sudo add-apt-repository -y "deb http://linux.dropbox.com/ubuntu $(lsb_release -sc) main"
-	sudo apt-get -y update
+    sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
+    write_log "Adding Dropbox repository"
+    sudo add-apt-repository -y "deb http://linux.dropbox.com/ubuntu $(lsb_release -sc) main"
+    sudo apt-get -y update
 
-	write_log "Installing Dropbox"
-	sudo apt-get -y install nautilus-dropbox
+    write_log "Installing Dropbox"
+    sudo apt-get -y install nautilus-dropbox
 fi
 
 ###############################################################################
@@ -448,15 +448,15 @@ fi
 ###############################################################################
 if [ ${programs['_rescueTime']} == true ]
 then
-	wget https://www.rescuetime.com/installers/rescuetime_current_amd64.deb
+    wget https://www.rescuetime.com/installers/rescuetime_current_amd64.deb
 
-	write_log 'Installing RescueTime dependencies'
-	sudo apt-get install -y gtk2-engines-pixbuf
-	sudo apt-get install -f
+    write_log 'Installing RescueTime dependencies'
+    sudo apt-get install -y gtk2-engines-pixbuf
+    sudo apt-get install -f
 
-	write_log 'Installing RescueTime'
-	sudo dpkg -i rescuetime_current_amd64.deb
-	rm rescuetime_current_amd64.deb
+    write_log 'Installing RescueTime'
+    sudo dpkg -i rescuetime_current_amd64.deb
+    rm rescuetime_current_amd64.deb
 fi
 
 
@@ -465,20 +465,20 @@ fi
 ###############################################################################
 if [ ${programs['git']} == true ]
 then
-	write_log 'Configure git'
-	echo "Enter your github user.name"
-	read git_name
-	git config --global user.name $git_name
+    write_log 'Configure git'
+    echo "Enter your github user.name"
+    read git_name
+    git config --global user.name $git_name
 
-	echo "Enter your github user.email"
-	read git_email
-	git config --global user.email $git_email
+    echo "Enter your github user.email"
+    read git_email
+    git config --global user.email $git_email
 fi
 
 if [ ${programs['_heroku-toolbelt']} == true ]
 then
-	write_log 'Configure Heroku'
-	heroku login
+    write_log 'Configure Heroku'
+    heroku login
 fi
 
 write_log 'Autoremove all the shit...'

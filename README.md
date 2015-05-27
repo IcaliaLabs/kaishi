@@ -25,7 +25,7 @@ Remember, with great power comes great responsibility!
 	
 ### Linux
 	
-	bash <(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-linux)
+	wget https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-linux -v -O kaishi.sh && bash kaishi.sh; rm -f kaishi.sh
 	
 And that is it!
 

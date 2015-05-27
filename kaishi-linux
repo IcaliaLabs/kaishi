@@ -265,20 +265,8 @@ then
         write_log 'You need to have "zsh" installed'
         write_log 'Cancelling Oh my Zsh installation'
     else
-
-        if [ ! -f "$HOME/.zshrc" ]
-        then
-            touch $HOME/.zshrc
-        fi
-
         write_log 'Installing Oh my Zsh'
         curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-
-        if [[ ":$PATH:" != *":$HOME/.bin:"* ]]
-        then
-            echo 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
-            export PATH="$HOME/.bin:$PATH"
-        fi
     fi
 fi
 

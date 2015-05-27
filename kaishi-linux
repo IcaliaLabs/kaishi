@@ -400,7 +400,7 @@ then
     sudo apt-get -y update
     
     write_log 'Installing Slack'
-    sudo apt-get -y install sublime-text-installer
+    sudo apt-get -y install scudcloud
 
     echo "alias slack='scudcloud'" >> $HOME/.bashrc
 fi

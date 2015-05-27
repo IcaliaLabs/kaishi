@@ -25,7 +25,7 @@ Remember, with great power comes great responsibility!
 	
 ### Linux
 	
-	bash <(curl -s https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-linux)
+	wget https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/kaishi-linux -v -O kaishi.sh && bash kaishi.sh; rm -f kaishi.sh
 	
 And that is it!
 
@@ -91,11 +91,13 @@ So what it's in the box
 
 
 ### Linux
+*Installation time ~25min.*
 
 * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) as your default shell
 * [Git](http://git-scm.com/) for version controlling
 * [Postgresql](http://www.postgresql.org/) as  the database manager
 * [Vim](http://www.vim.org/) for text editing
+* [spf13-Vim](http://vim.spf13.com/) for a cool vim configuration
 * [ImageMagick](http://www.imagemagick.org/) for images processing
 * [Rbenv](https://github.com/sstephenson/rbenv) for managing the ruby environment
 * [Bundler](http://bundler.io/) gem
@@ -103,7 +105,17 @@ So what it's in the box
 * [Rails](http://rubyonrails.org/) gem for creating any rails app
 * [Heroku](https://toolbelt.heroku.com/) toolbelt to interact with the Heroku API
 * [Platter](https://github.com/IcaliaLabs/platter) for initializing any Rails app with Icalia's flavor
-* [Pow](http://pow.cx/) to run local apps locally like a superhero
+* [Prax](http://ysbaddaden.github.io/prax/) to be an alternative to Pow
+* [NodeJS](http://nodejs.org/) a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications
+* [Grunt](http://gruntjs.com/) the JavaScript Task Runner
+* [Slack](https://slack.com/) is a platform for team communication: everything in one place, instantly searchable, available wherever you go.
+* [Spotify](https://www.spotify.com/us/) Listen to the right music, wherever you are.
+* [Dropbox](https://www.dropbox.com/) Your stuff, anywhere 
+* [Remarkable](http://remarkableapp.net/) A free fully featured markdown editor 
+* [Sublime Text](http://www.sublimetext.com/) is a sophisticated text editor for code, markup and prose. You'll love the slick user interface, extraordinary features and amazing performance.
+* [VLC](http://www.videolan.org/vlc/) VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols.
+* [RescueTime](https://www.rescuetime.com/) helps you understand your daily habits so you can focus and be more productive.
+
 
 Credits
 -------

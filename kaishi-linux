@@ -267,6 +267,9 @@ then
     else
         write_log 'Installing Oh my Zsh'
         curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+        
+        write_log 'Set Zsh as the default shell'
+        chsh -s /bin/zsh
     fi
 fi
 

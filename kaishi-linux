@@ -250,15 +250,6 @@ echo "Logfile located at $LOG"
 
 install programs 'sudo apt-get -y install'
 
-# Before installing the gems
-echo 'gem: --no-document' > $HOME/.gemrc
-if [ ${gems['rails']} == true ]
-then
-    write_log "Installing Rails dependencies"
-    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev libyaml-dev
-fi
-
-install gems 'gem install'
 install js_packages 'sudo npm install'
 
 
@@ -267,19 +258,27 @@ install js_packages 'sudo npm install'
 ###############################################################################
 if [ ${programs['_ohMyZsh']} == true ]
 then
+    is_zsh_installed=$(whereis zsh | cut -d ':' -f2)
 
-    if [ ! -f "$HOME/.zshrc" ]
+    if [ -z "$is_zsh_installed" ]
     then
-        touch $HOME/.zshrc
-    fi
+        write_log 'You need to have "zsh" installed'
+        write_log 'Cancelling Oh my Zsh installation'
+    else
 
-    write_log 'Installing Oh my Zsh'
-    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+        if [ ! -f "$HOME/.zshrc" ]
+        then
+            touch $HOME/.zshrc
+        fi
 
-    if [[ ":$PATH:" != *":$HOME/.bin:"* ]]
-    then
-        echo 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
-        export PATH="$HOME/.bin:$PATH"
+        write_log 'Installing Oh my Zsh'
+        curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+        if [[ ":$PATH:" != *":$HOME/.bin:"* ]]
+        then
+            echo 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
+            export PATH="$HOME/.bin:$PATH"
+        fi
     fi
 fi
 
@@ -288,9 +287,18 @@ fi
 ###############################################################################
 if [ ${programs['_spf13-vim']} == true ]
 then
-    write_log 'Installing SPF13-Vim'
-    sh <(curl https://j.mp/spf13-vim3 -L)
-    > $HOME/.vimrc.bundles.local
+    is_git_installed=$(whereis git | cut -d ':' -f2)
+    is_vim_installed=$(whereis vim | cut -d ':' -f2)
+
+    if [ -z "$is_git_installed" ] || [ -z "$is_vim_installed" ]
+    then
+        write_log 'You need to have "git" and "vim" installed'
+        write_log 'Cancelling SPF13-Vim installation'
+    else
+        write_log 'Installing SPF13-Vim'
+        sh <(curl https://j.mp/spf13-vim3 -L)
+        > $HOME/.vimrc.bundles.local
+    fi
 fi
 
 ###############################################################################
@@ -316,49 +324,51 @@ fi
 ###############################################################################
 if [ ${programs['_rbenv']} == true ]
 then
-    write_log "Installing rbenv"
+    is_git_installed=$(whereis git | cut -d ':' -f2)
 
-    if [[ ! -d "$HOME/.rbenv" ]]
+    if [ -z "$is_git_installed" ]
     then
-        git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
-        if ! grep -qs "rbenv init" ~/.zshrc
+        write_log 'You need to have "git" installed'
+        write_log 'Cancelling rbenv installation'
+    else
+        write_log "Installing rbenv"
+
+        if [[ ! -d "$HOME/.rbenv" ]]
         then
-            echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.zshrc
-            echo 'eval "$(rbenv init - --no-rehash)"' >> $HOME/.zshrc
+            git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
+            if ! grep -qs "rbenv init" ~/.zshrc
+            then
+                echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.zshrc
+                echo 'eval "$(rbenv init - --no-rehash)"' >> $HOME/.zshrc
+            fi
+
+            export PATH="$HOME/.rbenv/bin:$PATH"
+            eval "$(rbenv init -)"
         fi
 
-        export PATH="$HOME/.rbenv/bin:$PATH"
-        eval "$(rbenv init -)"
+        if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]
+        then
+            write_log 'Installing rbenv-gem-rehash...'
+            git clone https://github.com/sstephenson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
+        fi
+
+        if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]
+        then
+            write_log "Installing ruby-build, to install Rubies ..."
+            git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+            
+            # Resolve https://github.com/sstephenson/ruby-build/issues/690
+            sudo apt-get install libffi-dev
+        fi
+
+        ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"
+        write_log "Installing Ruby $ruby_version ..."
+        rbenv install -s "$ruby_version"
+
+        ruby_version "Setting $ruby_version as global default Ruby ..."
+        rbenv global "$ruby_version"
+        rbenv rehash
     fi
-
-    if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]
-    then
-        write_log 'Installing rbenv-gem-rehash...'
-        git clone https://github.com/sstephenson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
-    fi
-
-    if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]
-    then
-        write_log "Installing ruby-build, to install Rubies ..."
-        git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-        
-        # Resolve https://github.com/sstephenson/ruby-build/issues/690
-        sudo apt-get install libffi-dev
-    fi
-
-    ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"
-    write_log "Installing Ruby $ruby_version ..."
-    rbenv install -s "$ruby_version"
-
-    ruby_version "Setting $ruby_version as global default Ruby ..."
-    rbenv global "$ruby_version"
-    rbenv rehash
-    write_log "Updating gems..."
-    gem update --system
-
-    write_log "Parallel bundler gem installation..."
-    number_of_cores=$(nproc)
-    bundle config --global jobs $((number_of_cores - 1))
 fi
 
 ###############################################################################
@@ -366,10 +376,18 @@ fi
 ###############################################################################
 if [ ${programs['_prax']} == true ]
 then
-    write_log "Installing prax..."
-    git clone git://github.com/ysbaddaden/prax.git
-    cd prax && ./bin/prax install
-    echo 'prax start' >> ~/.zshrc
+    is_git_installed=$(whereis git | cut -d ':' -f2)
+
+    if [ -z "$is_git_installed" ]
+    then
+        write_log 'You need to have "git" and "vim" installed'
+        write_log 'Cancelling SPF13-Vim installation'
+    else
+        write_log "Installing prax..."
+        git clone git://github.com/ysbaddaden/prax.git
+        cd prax && ./bin/prax install
+        echo 'prax start' >> ~/.zshrc
+    fi
 fi
 
 ###############################################################################
@@ -479,6 +497,36 @@ if [ ${programs['_heroku-toolbelt']} == true ]
 then
     write_log 'Configure Heroku'
     heroku login
+fi
+
+###############################################################################
+# Gems
+###############################################################################
+echo 'gem: --no-document' > $HOME/.gemrc
+if [ ${gems['rails']} == true ]
+then
+    write_log "Installing Rails dependencies"
+    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev libyaml-dev
+fi
+
+is_ruby_installed=$(whereis ruby | cut -d ':' -f2)
+
+if [ -z "$is_ruby_installed" ]
+then
+    write_log 'You need to have "ruby" installed'
+    write_log 'Cancelling Gems installation'
+else
+    install gems 'gem install'
+    
+    write_log "Updating gems..."
+    gem update --system
+    
+    if [ ${gems['bundler']} == true ]
+    then
+        write_log "Parallel bundler gem installation..."
+        number_of_cores=$(nproc)
+        bundle config --global jobs $((number_of_cores - 1))
+    fi
 fi
 
 write_log 'Autoremove all the shit...'

@@ -365,7 +365,7 @@ then
         write_log "Installing Ruby $ruby_version ..."
         rbenv install -s "$ruby_version"
 
-        ruby_version "Setting $ruby_version as global default Ruby ..."
+        write_log "Setting $ruby_version as global default Ruby ..."
         rbenv global "$ruby_version"
         rbenv rehash
     fi

@@ -458,7 +458,7 @@ then
     sudo apt-get -y update
 
     write_log "Installing Dropbox"
-    sudo apt-get -y install nautilus-dropbox
+    sudo apt-get -y install dropbox
 fi
 
 ###############################################################################
@@ -469,9 +469,8 @@ then
     wget https://www.rescuetime.com/installers/rescuetime_current_amd64.deb
 
     write_log 'Installing RescueTime dependencies'
-    sudo apt-get install -y gtk2-engines-pixbuf
-    sudo apt-get install -f
-
+    sudo apt-get install -y gtk2-engines-pixbuf sqlite3
+    
     write_log 'Installing RescueTime'
     sudo dpkg -i rescuetime_current_amd64.deb
     rm rescuetime_current_amd64.deb

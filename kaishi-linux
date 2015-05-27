@@ -426,7 +426,7 @@ then
     wget http://remarkableapp.net/files/remarkable_1.41_all.deb
 
     write_log 'Installing Remarkable dependencies'
-    sudo apt-get install python3-markdown python3-bs4 wkhtmltopdf
+    sudo apt-get -y install python3-markdown python3-bs4 wkhtmltopdf
     
     write_log 'Installing Remarkable'
     sudo dpkg -i remarkable_1.41_all.deb

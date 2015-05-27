@@ -91,6 +91,7 @@ So what it's in the box
 
 
 ### Linux
+*Installation time ~25min.*
 
 * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) as your default shell
 * [Git](http://git-scm.com/) for version controlling

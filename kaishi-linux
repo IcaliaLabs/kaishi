@@ -375,7 +375,7 @@ then
         write_log 'Cancelling SPF13-Vim installation'
     else
         write_log "Installing prax..."
-        git clone git://github.com/ysbaddaden/prax.git /opt/prax
+        sudo git clone git://github.com/ysbaddaden/prax.git /opt/prax
         cd /opt/prax/ && ./bin/prax install
         cd $HOME
         echo 'prax start' >> ~/.zshrc

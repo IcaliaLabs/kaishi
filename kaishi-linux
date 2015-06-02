@@ -496,7 +496,7 @@ echo 'gem: --no-document' > $HOME/.gemrc
 if [ ${gems['rails']} == true ]
 then
     write_log "Installing Rails dependencies"
-    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev libyaml-dev
+    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev libyaml-dev libsqlite3-dev
 fi
 
 is_ruby_installed=$(whereis ruby | cut -d ':' -f2)

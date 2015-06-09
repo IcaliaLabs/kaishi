@@ -349,7 +349,8 @@ then
             git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
             
             # Resolve https://github.com/sstephenson/ruby-build/issues/690
-            sudo apt-get install libffi-dev
+            # Resolve http://stackoverflow.com/questions/4385549/no-such-file-to-load-readline
+            sudo apt-get install libffi-dev libreadline-dev
         fi
 
         ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"
@@ -372,15 +373,23 @@ then
     if [ -z "$is_git_installed" ]
     then
         write_log 'You need to have "git" and "vim" installed'
-        write_log 'Cancelling SPF13-Vim installation'
+        write_log 'Cancelling Prax installation'
     else
-        write_log "Installing prax..."
-        sudo git clone git://github.com/ysbaddaden/prax.git /opt/prax
-        cd /opt/prax/ && ./bin/prax install
-        cd $HOME
-        echo 'prax start' >> ~/.zshrc
+        is_prax_installed=$(whereis prax | cut -d ':' -f2)
+
+        if [ -z "$is_prax_installed" ]
+        then
+            write_log "Installing prax..."
+            sudo git clone git://github.com/ysbaddaden/prax.git /opt/prax
+            cd /opt/prax/ && ./bin/prax install
+            cd $HOME
+            echo 'prax start' >> ~/.zshrc
+        else
+            write_log 'Prax already installed'
+        fi
     fi
 fi
+
 
 ###############################################################################
 # Slack
@@ -431,12 +440,30 @@ fi
 ###############################################################################
 if [ ${programs['_sublimeText']} == true ]
 then
+    sublime_config="$HOME/.config/sublime-text-3/"
+
     write_log 'Adding repository for Sublime Text 3...'
 
     sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
     sudo apt-get -y update
     write_log 'Installing Sublime Text 3'
     sudo apt-get -y install sublime-text-installer
+
+    # Add package controller
+    wget https://packagecontrol.io/Package%20Control.sublime-package
+    mv "Package Control.sublime-package" "$sublime_config"
+
+    # Add extra packages
+    sublime_packages='{
+    "installed_packages":
+    [
+        "SideBarEnhancements",
+        "SublimeLintern"
+    ]
+}'
+    touch "$sublime_config""Packages/User/Package Control.sublime-settings"
+    echo "$sublime_packages" > "$sublime_config""Packages/User/Package Control.sublime-settings"
+
 fi
 
 ###############################################################################
@@ -451,6 +478,8 @@ then
 
     write_log "Installing Dropbox"
     sudo apt-get -y install dropbox
+
+    dropbox start -i &
 fi
 
 ###############################################################################
@@ -458,14 +487,19 @@ fi
 ###############################################################################
 if [ ${programs['_rescueTime']} == true ]
 then
-    wget https://www.rescuetime.com/installers/rescuetime_current_amd64.deb
+    if [ $ARCH == 'x86_64' ]
+    then
+        wget https://www.rescuetime.com/installers/rescuetime_current_i386.deb -O rescuetime.deb
+    else
+        wget https://www.rescuetime.com/installers/rescuetime_current_amd64.deb -O rescuetime.deb
+    fi
 
     write_log 'Installing RescueTime dependencies'
     sudo apt-get install -y gtk2-engines-pixbuf sqlite3
     
     write_log 'Installing RescueTime'
-    sudo dpkg -i rescuetime_current_amd64.deb
-    rm rescuetime_current_amd64.deb
+    sudo dpkg -i rescuetime.deb
+    rm rescuetime.deb
 fi
 
 
@@ -497,17 +531,22 @@ echo 'gem: --no-document' > $HOME/.gemrc
 if [ ${gems['rails']} == true ]
 then
     write_log "Installing Rails dependencies"
-    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev libyaml-dev libsqlite3-dev
+    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libyaml-dev libsqlite3-dev
 fi
 
 is_ruby_installed=$(whereis ruby | cut -d ':' -f2)
+is_rbenv_installed=$(whereis rbenv | cut -d ':' -f2)
 
 if [ -z "$is_ruby_installed" ]
 then
     write_log 'You need to have "ruby" installed'
     write_log 'Cancelling Gems installation'
 else
-    install gems 'gem install'
+    if [ -z "$is_rbenv_installed"]
+        install gems 'sudo gem install'
+    else
+        install gems 'gem install'
+    fi
     
     write_log "Updating gems..."
     gem update --system

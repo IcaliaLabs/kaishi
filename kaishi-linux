@@ -374,11 +374,18 @@ then
         write_log 'You need to have "git" and "vim" installed'
         write_log 'Cancelling SPF13-Vim installation'
     else
-        write_log "Installing prax..."
-        sudo git clone git://github.com/ysbaddaden/prax.git /opt/prax
-        cd /opt/prax/ && ./bin/prax install
-        cd $HOME
-        echo 'prax start' >> ~/.zshrc
+        is_prax_installed=$(whereis prax | cut -d ':' -f2)
+
+        if [ -z "$is_prax_installed" ]
+        then
+            write_log "Installing prax..."
+            sudo git clone git://github.com/ysbaddaden/prax.git /opt/prax
+            cd /opt/prax/ && ./bin/prax install
+            cd $HOME
+            echo 'prax start' >> ~/.zshrc
+        else
+            write_log 'Prax already installed'
+        fi
     fi
 fi
 

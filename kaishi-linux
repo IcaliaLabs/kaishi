@@ -440,12 +440,30 @@ fi
 ###############################################################################
 if [ ${programs['_sublimeText']} == true ]
 then
+    sublime_config="$HOME/.config/sublime-text-3/"
+
     write_log 'Adding repository for Sublime Text 3...'
 
     sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
     sudo apt-get -y update
     write_log 'Installing Sublime Text 3'
     sudo apt-get -y install sublime-text-installer
+
+    # Add package controller
+    wget https://packagecontrol.io/Package%20Control.sublime-package
+    mv "Package Control.sublime-package" "$sublime_config"
+
+    # Add extra packages
+    sublime_packages='{
+    "installed_packages":
+    [
+        "SideBarEnhancements",
+        "SublimeLintern"
+    ]
+}'
+    touch "$sublime_config""Packages/User/Package Control.sublime-settings"
+    echo "$sublime_packages" > "$sublime_config""Packages/User/Package Control.sublime-settings"
+
 fi
 
 ###############################################################################

@@ -349,7 +349,7 @@ then
             git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
             
             # Resolve https://github.com/sstephenson/ruby-build/issues/690
-            sudo apt-get install libffi-dev
+            sudo apt-get install libffi-dev libreadline-dev
         fi
 
         ruby_version="$(curl -sSL https://raw.githubusercontent.com/IcaliaLabs/kaishi/master/latest_ruby)"
@@ -497,7 +497,7 @@ echo 'gem: --no-document' > $HOME/.gemrc
 if [ ${gems['rails']} == true ]
 then
     write_log "Installing Rails dependencies"
-    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libreadline-dev libyaml-dev libsqlite3-dev
+    sudo apt-get install -y libxslt1-dev libcurl4-openssl-dev libksba8 libksba-dev libqtwebkit-dev libyaml-dev libsqlite3-dev
 fi
 
 is_ruby_installed=$(whereis ruby | cut -d ':' -f2)

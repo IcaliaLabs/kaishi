@@ -467,14 +467,19 @@ fi
 ###############################################################################
 if [ ${programs['_rescueTime']} == true ]
 then
-    wget https://www.rescuetime.com/installers/rescuetime_current_amd64.deb
+    if [ $ARCH == 'x86_64' ]
+    then
+        wget https://www.rescuetime.com/installers/rescuetime_current_i386.deb -O rescuetime.deb
+    else
+        wget https://www.rescuetime.com/installers/rescuetime_current_amd64.deb -O rescuetime.deb
+    fi
 
     write_log 'Installing RescueTime dependencies'
     sudo apt-get install -y gtk2-engines-pixbuf sqlite3
     
     write_log 'Installing RescueTime'
-    sudo dpkg -i rescuetime_current_amd64.deb
-    rm rescuetime_current_amd64.deb
+    sudo dpkg -i rescuetime.deb
+    rm rescuetime.deb
 fi
 
 

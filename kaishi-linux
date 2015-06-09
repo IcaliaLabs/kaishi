@@ -349,6 +349,7 @@ then
             git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
             
             # Resolve https://github.com/sstephenson/ruby-build/issues/690
+            # Resolve http://stackoverflow.com/questions/4385549/no-such-file-to-load-readline
             sudo apt-get install libffi-dev libreadline-dev
         fi
 
@@ -372,7 +373,7 @@ then
     if [ -z "$is_git_installed" ]
     then
         write_log 'You need to have "git" and "vim" installed'
-        write_log 'Cancelling SPF13-Vim installation'
+        write_log 'Cancelling Prax installation'
     else
         is_prax_installed=$(whereis prax | cut -d ':' -f2)
 
@@ -388,6 +389,7 @@ then
         fi
     fi
 fi
+
 
 ###############################################################################
 # Slack

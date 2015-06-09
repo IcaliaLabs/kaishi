@@ -451,6 +451,8 @@ then
 
     write_log "Installing Dropbox"
     sudo apt-get -y install dropbox
+
+    dropbox start -i &
 fi
 
 ###############################################################################

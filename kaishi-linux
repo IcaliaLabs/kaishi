@@ -535,13 +535,18 @@ then
 fi
 
 is_ruby_installed=$(whereis ruby | cut -d ':' -f2)
+is_rbenv_installed=$(whereis rbenv | cut -d ':' -f2)
 
 if [ -z "$is_ruby_installed" ]
 then
     write_log 'You need to have "ruby" installed'
     write_log 'Cancelling Gems installation'
 else
-    install gems 'gem install'
+    if [ -z "$is_rbenv_installed"]
+        install gems 'sudo gem install'
+    else
+        install gems 'gem install'
+    fi
     
     write_log "Updating gems..."
     gem update --system

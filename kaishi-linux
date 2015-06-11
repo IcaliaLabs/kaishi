@@ -458,6 +458,11 @@ then
     write_log 'Installing Sublime Text 3'
     sudo apt-get -y install sublime-text-installer
 
+    if [[ ! -d "$sublime_config" ]]
+    then
+        mkdir "$sublime_config"
+    fi
+    
     # Add package controller
     wget https://packagecontrol.io/Package%20Control.sublime-package
     mv "Package Control.sublime-package" "$sublime_config"

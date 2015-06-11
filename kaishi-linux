@@ -235,7 +235,8 @@ install()
 }
 
 # Determine machine architecture
-if [ $(arch) = 'x86_64' ]; then
+if [ $(arch) = 'x86_64' ]
+then
     ARCH='x86_64'
 else
     ARCH='x86'
@@ -250,7 +251,14 @@ echo "Logfile located at $LOG"
 
 install programs 'sudo apt-get -y install'
 
-install js_packages 'sudo npm install'
+is_npm_installed=$(whereis npm | cut -d ':' -f2)
+if [ -z "$is_npm_installed" ]
+then
+    install js_packages 'sudo npm install'
+else
+    write_log "Canceling js_packages installation..."
+    write_log "You need npm to install javascript packages"
+fi
 
 
 ###############################################################################
@@ -463,7 +471,6 @@ then
 }'
     touch "$sublime_config""Packages/User/Package Control.sublime-settings"
     echo "$sublime_packages" > "$sublime_config""Packages/User/Package Control.sublime-settings"
-
 fi
 
 ###############################################################################
@@ -543,6 +550,7 @@ then
     write_log 'Cancelling Gems installation'
 else
     if [ -z "$is_rbenv_installed"]
+    then
         install gems 'sudo gem install'
     else
         install gems 'gem install'

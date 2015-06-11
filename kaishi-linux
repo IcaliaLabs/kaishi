@@ -342,8 +342,9 @@ then
             fi
 
             export PATH="$HOME/.rbenv/bin:$PATH"
-            eval "$(rbenv init -)"
         fi
+
+        rbenv init
 
         if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]
         then

@@ -254,10 +254,10 @@ install programs 'sudo apt-get -y install'
 is_npm_installed=$(whereis npm | cut -d ':' -f2)
 if [ -z "$is_npm_installed" ]
 then
-    install js_packages 'sudo npm install'
-else
     write_log "Canceling js_packages installation..."
     write_log "You need npm to install javascript packages"
+else
+    install js_packages 'sudo npm install'
 fi
 
 

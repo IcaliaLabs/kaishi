@@ -549,7 +549,7 @@ then
     write_log 'You need to have "ruby" installed'
     write_log 'Cancelling Gems installation'
 else
-    if [ -z "$is_rbenv_installed"]
+    if [ -z "$is_rbenv_installed" ]
     then
         install gems 'sudo gem install'
     else

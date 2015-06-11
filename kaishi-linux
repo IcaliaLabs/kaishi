@@ -235,7 +235,8 @@ install()
 }
 
 # Determine machine architecture
-if [ $(arch) = 'x86_64' ]; then
+if [ $(arch) = 'x86_64' ]
+then
     ARCH='x86_64'
 else
     ARCH='x86'
@@ -470,7 +471,6 @@ then
 }'
     touch "$sublime_config""Packages/User/Package Control.sublime-settings"
     echo "$sublime_packages" > "$sublime_config""Packages/User/Package Control.sublime-settings"
-
 fi
 
 ###############################################################################
@@ -550,6 +550,7 @@ then
     write_log 'Cancelling Gems installation'
 else
     if [ -z "$is_rbenv_installed"]
+    then
         install gems 'sudo gem install'
     else
         install gems 'gem install'

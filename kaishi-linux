@@ -254,10 +254,10 @@ install programs 'sudo apt-get -y install'
 is_npm_installed=$(whereis npm | cut -d ':' -f2)
 if [ -z "$is_npm_installed" ]
 then
-    install js_packages 'sudo npm install'
-else
     write_log "Canceling js_packages installation..."
     write_log "You need npm to install javascript packages"
+else
+    install js_packages 'sudo npm install'
 fi
 
 
@@ -342,8 +342,9 @@ then
             fi
 
             export PATH="$HOME/.rbenv/bin:$PATH"
-            eval "$(rbenv init -)"
         fi
+
+        rbenv init
 
         if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]
         then
@@ -457,6 +458,11 @@ then
     write_log 'Installing Sublime Text 3'
     sudo apt-get -y install sublime-text-installer
 
+    if [[ ! -d "$sublime_config" ]]
+    then
+        mkdir "$sublime_config"
+    fi
+    
     # Add package controller
     wget https://packagecontrol.io/Package%20Control.sublime-package
     mv "Package Control.sublime-package" "$sublime_config"
@@ -549,7 +555,7 @@ then
     write_log 'You need to have "ruby" installed'
     write_log 'Cancelling Gems installation'
 else
-    if [ -z "$is_rbenv_installed"]
+    if [ -z "$is_rbenv_installed" ]
     then
         install gems 'sudo gem install'
     else

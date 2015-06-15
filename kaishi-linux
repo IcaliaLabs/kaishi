@@ -472,7 +472,7 @@ then
     "installed_packages":
     [
         "SideBarEnhancements",
-        "SublimeLintern"
+        "SublimeLinter"
     ]
 }'
     touch "$sublime_config""Packages/User/Package Control.sublime-settings"

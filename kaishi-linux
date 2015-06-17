@@ -33,6 +33,7 @@ declare -A programs=(
     ["_heroku-toolbelt"]=true           # Heroku command line client
     ["imagemagick"]=true                # ImageMagick
     ["vlc"]=true                        # VLC
+    ["_fpp"]=true                       # Path Picker
 
     # Software Development
     ["nodejs"]=true                     # Node.js
@@ -73,6 +74,7 @@ declare -a programs_ordered=(
     "_heroku-toolbelt"
     "imagemagick"
     "vlc"
+    "_fpp"
 
     # Software Developmentp
     "nodejs"
@@ -515,6 +517,18 @@ then
     rm rescuetime.deb
 fi
 
+###############################################################################
+# Path Picker (fpp)
+###############################################################################
+if [ ${programs['_fpp']} == true ]
+then
+    write_log 'Installing Path Picker (fpp)'
+    cd /usr/local/
+    git clone git@github.com:facebook/PathPicker.git
+    cd PathPicker
+    ln -s "$(pwd)/fpp" /usr/local/bin/fpp
+    cd $HOME
+fi
 
 ###############################################################################
 # Configuration

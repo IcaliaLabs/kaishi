@@ -346,8 +346,6 @@ then
             export PATH="$HOME/.rbenv/bin:$PATH"
         fi
 
-        rbenv init
-
         if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]
         then
             write_log 'Installing rbenv-gem-rehash...'
@@ -371,6 +369,7 @@ then
         write_log "Setting $ruby_version as global default Ruby ..."
         rbenv global "$ruby_version"
         rbenv rehash
+        rbenv init
     fi
 fi
 

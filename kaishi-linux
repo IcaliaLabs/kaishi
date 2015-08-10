@@ -33,6 +33,7 @@ declare -A programs=(
     ["_heroku-toolbelt"]=true           # Heroku command line client
     ["imagemagick"]=true                # ImageMagick
     ["vlc"]=true                        # VLC
+    ["_fpp"]=true                       # Path Picker
 
     # Software Development
     ["nodejs"]=true                     # Node.js
@@ -73,6 +74,7 @@ declare -a programs_ordered=(
     "_heroku-toolbelt"
     "imagemagick"
     "vlc"
+    "_fpp"
 
     # Software Developmentp
     "nodejs"
@@ -344,8 +346,6 @@ then
             export PATH="$HOME/.rbenv/bin:$PATH"
         fi
 
-        rbenv init
-
         if [[ ! -d "$HOME/.rbenv/plugins/rbenv-gem-rehash" ]]
         then
             write_log 'Installing rbenv-gem-rehash...'
@@ -369,6 +369,7 @@ then
         write_log "Setting $ruby_version as global default Ruby ..."
         rbenv global "$ruby_version"
         rbenv rehash
+        rbenv init
     fi
 fi
 
@@ -472,7 +473,7 @@ then
     "installed_packages":
     [
         "SideBarEnhancements",
-        "SublimeLintern"
+        "SublimeLinter"
     ]
 }'
     touch "$sublime_config""Packages/User/Package Control.sublime-settings"
@@ -515,6 +516,18 @@ then
     rm rescuetime.deb
 fi
 
+###############################################################################
+# Path Picker (fpp)
+###############################################################################
+if [ ${programs['_fpp']} == true ]
+then
+    write_log 'Installing Path Picker (fpp)'
+    cd /usr/local/
+    git clone git@github.com:facebook/PathPicker.git
+    cd PathPicker
+    ln -s "$(pwd)/fpp" /usr/local/bin/fpp
+    cd $HOME
+fi
 
 ###############################################################################
 # Configuration

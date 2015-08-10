@@ -110,11 +110,12 @@ So what it's in the box
 * [Grunt](http://gruntjs.com/) the JavaScript Task Runner
 * [Slack](https://slack.com/) is a platform for team communication: everything in one place, instantly searchable, available wherever you go.
 * [Spotify](https://www.spotify.com/us/) Listen to the right music, wherever you are.
-* [Dropbox](https://www.dropbox.com/) Your stuff, anywhere 
+* [Dropbox](https://www.dropbox.com/) Your stuff, anywhere.
 * [Remarkable](http://remarkableapp.net/) A free fully featured markdown editor 
 * [Sublime Text](http://www.sublimetext.com/) is a sophisticated text editor for code, markup and prose. You'll love the slick user interface, extraordinary features and amazing performance.
 * [VLC](http://www.videolan.org/vlc/) VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols.
 * [RescueTime](https://www.rescuetime.com/) helps you understand your daily habits so you can focus and be more productive.
+* [PathPicker](http://facebook.github.io/PathPicker/) Select files from terminal with a nice UI.
 
 
 Credits

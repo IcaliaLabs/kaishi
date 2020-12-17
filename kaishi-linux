@@ -49,6 +49,7 @@ declare -A programs=(
     ["_sublimeText"]=true               # Sublime Text 3
     ["_dropbox"]=true                   # Dropbox
     ["_rescueTime"]=true                # RescueTime
+    ["_docker"]=true                     # Docker
     )
 
 declare -A gems=(
@@ -79,6 +80,7 @@ declare -a programs_ordered=(
     # Software Developmentp
     "nodejs"
     "npm"
+    "_docker"
     "_postgreSQL"
     "_rbenv"
     "_prax"
@@ -494,6 +496,19 @@ then
     sudo apt-get -y install dropbox
 
     dropbox start -i &
+fi
+
+###############################################################################
+# Docker
+###############################################################################
+if [ ${programs['_docker']} == true ]
+then
+    write_log "Adding Docker"
+    sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    apt-cache policy docker-ce
+    sudo apt install docker-ce
 fi
 
 ###############################################################################
